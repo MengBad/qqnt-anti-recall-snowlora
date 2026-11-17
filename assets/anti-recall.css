@@ -1,0 +1,180 @@
+/* SnowLora 版防撤回：自持 UI，避免依赖 LiteLoader 设置窗组件。 */
+.anti-recall-settings-dialog {
+  position: fixed;
+  z-index: 2147483100;
+  width: min(760px, calc(100vw - 48px));
+  max-height: min(86vh, 900px);
+  padding: 0;
+  border: 1px solid rgba(127, 127, 127, .28);
+  border-radius: 14px;
+  background: var(--bg_bottom_standard, #1f1f1f);
+  color: var(--text_primary, #eee);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .45);
+  overflow: hidden;
+}
+.anti-recall-settings-dialog::backdrop {
+  background: rgba(0, 0, 0, .48);
+  backdrop-filter: blur(3px);
+}
+.anti-recall-settings-dialog[open] { display: flex; flex-direction: column; }
+
+.anti-recall-settings-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(127, 127, 127, .18);
+  font-size: 15px;
+  flex: 0 0 auto;
+}
+.anti-recall-settings-spacer { flex: 1; }
+.anti-recall-settings-close {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.anti-recall-settings-close:hover { background: rgba(127, 127, 127, .18); }
+
+.anti-recall-settings-view {
+  overflow: auto;
+  flex: 1 1 auto;
+  min-height: 120px;
+}
+.anti-recall-settings-view .config_view { margin: 8px 20px 24px; }
+.anti-recall-settings-error { padding: 16px 20px; color: #ff8a8a; }
+
+#anti-recall-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 56px;
+  z-index: 2147483200;
+  transform: translate(-50%, 12px);
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(20, 20, 20, .9);
+  color: #fff;
+  font-size: 13px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+#anti-recall-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+#anti-recall-toast[data-kind="error"] { background: rgba(160, 40, 40, .94); }
+#anti-recall-toast[data-kind="ok"] { background: rgba(30, 110, 70, .94); }
+
+@media (prefers-color-scheme: light) {
+}
+.anti-recall-log-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  pointer-events: auto;
+}
+.anti-recall-log-view {
+  width: 100%;
+  min-height: 220px;
+  box-sizing: border-box;
+  margin: 8px 0 4px;
+  padding: 10px;
+  border: 1px solid rgba(127, 127, 127, .28);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, .28);
+  color: var(--text_primary, #ddd);
+  font-family: Consolas, "Cascadia Mono", monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  resize: vertical;
+  white-space: pre;
+  pointer-events: auto;
+}
+@media (prefers-color-scheme: light) {
+  .anti-recall-log-view { background: rgba(255, 255, 255, .7); color: #222; }
+}
+/* ── QQ 设置页内嵌选项卡 ── */
+.anti-recall-settings-navbar {
+  margin-top: 2px;
+}
+.anti-recall-settings-page {
+  min-height: 0;
+  margin-bottom: 32px;
+  box-sizing: border-box;
+}
+.anti-recall-embedded {
+  min-height: 0;
+  padding: 0 8px 24px;
+  color: var(--text_primary, #ddd);
+}
+.anti-recall-embedded-inner > .config_view {
+  margin: 0;
+  max-width: 100%;
+}
+.anti-recall-embedded .config_view .vertical-list-item,
+.anti-recall-embedded .config_view setting-item[data-direction="row"] {
+  gap: 12px;
+}
+.anti-recall-embedded .config_view .secondary-text {
+  display: block;
+  max-width: 62ch;
+  line-height: 1.55;
+}
+.anti-recall-embedded .config_view input[type="number"],
+.anti-recall-embedded .config_view input[type="color"] {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.anti-recall-embedded .anti-recall-log-controls {
+  justify-content: flex-start;
+  margin: 6px 0 2px;
+}
+.anti-recall-embedded .anti-recall-log-view {
+  min-height: 260px;
+  max-height: 52vh;
+}
+
+/* ── 自有 dialog / 上游设置面板排版 ── */
+.anti-recall-settings-dialog .anti-recall-settings-view {
+  padding: 4px 6px 18px;
+  box-sizing: border-box;
+}
+.anti-recall-settings-dialog .config_view {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.anti-recall-settings-dialog .config_view h2,
+.anti-recall-settings-dialog .config_view setting-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.anti-recall-settings-dialog .config_view .secondary-text {
+  max-width: 68ch;
+  line-height: 1.55;
+  opacity: .82;
+}
+.anti-recall-settings-dialog .config_view hr.horizontal-dividing-line {
+  margin: 8px 0 !important;
+  opacity: .5;
+}
+.anti-recall-settings-dialog .config_view .q-switch {
+  flex: 0 0 auto;
+  margin-left: 12px;
+}
+
+/* ── 日志文本可读性 ── */
+.anti-recall-log-view {
+  font-variant-numeric: tabular-nums;
+  tab-size: 2;
+  letter-spacing: .1px;
+  white-space: pre;
+  overflow: auto;
+}
+.anti-recall-log-controls .q-button {
+  white-space: nowrap;
+}

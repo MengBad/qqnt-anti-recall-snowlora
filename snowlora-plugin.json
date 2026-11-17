@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "id": "qqnt-anti-recall",
+  "name": "防撤回",
+  "author": "XiaoHe321 / SnowLora 适配",
+  "description": "拦截 QQNT 撤回消息并还原原文；LiteLoaderQQNT-Anti-Recall 的 SnowLora 移植版",
+  "version": "0.3.0+snowlora.8",
+  "minSnowLora": "0.3.0",
+  "rules": [
+    { "name": "qqnt-anti-recall-main", "title_contains": "QQ", "script": "load.js", "enabled": true },
+    { "name": "qqnt-anti-recall-settings", "title_contains": "设置", "script": "load.js", "enabled": true },
+    { "name": "qqnt-anti-recall-settings-qq", "title_contains": "QQ", "script": "load.js", "enabled": true }
+  ]
+}

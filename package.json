@@ -1,0 +1,10 @@
+{
+  "name": "qqnt-anti-recall-snowlora",
+  "version": "0.3.0+snowlora.8",
+  "private": true,
+  "repository": { "type": "git", "url": "https://github.com/MengBad/qqnt-anti-recall-snowlora.git" },
+  "homepage": "https://github.com/MengBad/qqnt-anti-recall-snowlora#readme",
+  "description": "SnowLora 版 QQNT 防撤回插件（零运行时依赖）",
+  "license": "MIT",
+  "dependencies": {}
+}
